@@ -154,25 +154,55 @@ function HeroSection() {
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
+          position: 'relative',
         }}>
+          {/* Abstract glowing background */}
           <div style={{
-            width: '340px',
-            height: '340px',
+            position: 'absolute',
+            width: '140%',
+            height: '140%',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            background: 'radial-gradient(circle at 20% 30%, rgba(56, 189, 248, 0.3) 0%, transparent 60%), radial-gradient(circle at 80% 70%, rgba(217, 70, 239, 0.3) 0%, transparent 60%)',
+            filter: 'blur(80px)',
+            zIndex: 0,
+            pointerEvents: 'none',
+          }} />
+
+          {/* Glassmorphic Image Card (Golden Ratio-ish) */}
+          <div style={{
+            position: 'relative',
+            zIndex: 1,
+            width: '100%',
+            maxWidth: '380px',
+            aspectRatio: '1 / 1.25',
             borderRadius: '24px',
-            background: 'var(--bg-card)',
-            border: '1px solid var(--border-subtle)',
-            overflow: 'hidden',
+            background: 'rgba(255, 255, 255, 0.03)',
+            backdropFilter: 'blur(24px)',
+            WebkitBackdropFilter: 'blur(24px)',
+            border: '1px solid rgba(255, 255, 255, 0.1)',
+            boxShadow: '0 24px 48px -12px rgba(0, 0, 0, 0.5)',
+            padding: '12px',
           }}>
-            <img 
-              src="/images/Anshul_Ghogre.png" 
-              alt="Anshul Ghogre" 
-              style={{
-                width: '100%',
-                height: '100%',
-                objectFit: 'cover',
-                display: 'block'
-              }} 
-            />
+            <div style={{
+              width: '100%',
+              height: '100%',
+              borderRadius: '16px',
+              overflow: 'hidden',
+              background: 'var(--bg-card)',
+            }}>
+              <img 
+                src="/images/Anshul_Ghogre.png" 
+                alt="Anshul Ghogre" 
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover',
+                  display: 'block'
+                }} 
+              />
+            </div>
           </div>
         </div>
       </div>
