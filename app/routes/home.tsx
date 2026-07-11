@@ -164,7 +164,7 @@ function HeroSection() {
             overflow: 'hidden',
           }}>
             <img 
-              src="/images/profile.jpg" 
+              src="/images/Anshul_Ghogre.png" 
               alt="Anshul Ghogre" 
               style={{
                 width: '100%',
@@ -506,23 +506,25 @@ function ProjectsSection() {
                 </span>
               </div>
 
-              <p style={{
-                fontSize: '14px',
-                color: 'var(--text-secondary)',
-                lineHeight: 1.6,
-                marginBottom: '12px',
+              <div style={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '12px',
+                marginBottom: '20px',
               }}>
-                {project.tagline}
-              </p>
-
-              <p style={{
-                fontSize: '12px',
-                color: 'var(--text-tertiary)',
-                lineHeight: 1.5,
-                marginBottom: '16px',
-              }}>
-                ⚡ {project.whatItProves}
-              </p>
+                <div style={{ fontSize: '13px', lineHeight: 1.5 }}>
+                  <span style={{ fontWeight: 600, color: 'var(--text-primary)' }}>Problem: </span>
+                  <span style={{ color: 'var(--text-secondary)' }}>{project.problem}</span>
+                </div>
+                <div style={{ fontSize: '13px', lineHeight: 1.5 }}>
+                  <span style={{ fontWeight: 600, color: 'var(--text-primary)' }}>Approach: </span>
+                  <span style={{ color: 'var(--text-secondary)' }}>{project.approach}</span>
+                </div>
+                <div style={{ fontSize: '13px', lineHeight: 1.5 }}>
+                  <span style={{ fontWeight: 600, color: 'var(--accent-blue)' }}>Result: </span>
+                  <span style={{ color: 'var(--text-secondary)' }}>{project.result}</span>
+                </div>
+              </div>
 
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
                 {project.techStack.slice(0, 5).map((tech) => (
