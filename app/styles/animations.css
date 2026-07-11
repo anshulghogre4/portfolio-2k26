@@ -1,0 +1,135 @@
+/* ─── Smooth Entrance Animations ─── */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.6s var(--ease) both;
+}
+
+.animate-fade-in {
+  animation: fade-in 0.5s ease both;
+}
+
+.delay-1 { animation-delay: 100ms; }
+.delay-2 { animation-delay: 200ms; }
+.delay-3 { animation-delay: 300ms; }
+.delay-4 { animation-delay: 400ms; }
+
+/* ─── Card hover glow ─── */
+.card {
+  position: relative;
+}
+
+.card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  background: radial-gradient(
+    600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(59, 130, 246, 0.04),
+    transparent 40%
+  );
+  pointer-events: none;
+}
+
+.card:hover::after {
+  opacity: 1;
+}
+
+/* ─── Responsive: Hero grid ─── */
+@media (max-width: 900px) {
+  .hero-grid {
+    grid-template-columns: 1fr !important;
+    text-align: center;
+    gap: 40px !important;
+  }
+
+  .hero-grid .hero-cta {
+    justify-content: center;
+  }
+
+  .hero-grid .hero-image-wrap {
+    order: -1;
+  }
+
+  .hero-grid .hero-image-wrap > div {
+    width: 240px !important;
+    height: 240px !important;
+  }
+}
+
+/* ─── Responsive: About pillars ─── */
+@media (max-width: 768px) {
+  .pillars-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* ─── Responsive: Certifications ─── */
+@media (max-width: 900px) {
+  .certs-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+@media (max-width: 500px) {
+  .certs-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* ─── Responsive: Projects ─── */
+@media (max-width: 768px) {
+  .projects-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* ─── Responsive: Work cards ─── */
+@media (max-width: 768px) {
+  .work-card-inner {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+}
+
+/* ─── Responsive: Contact ─── */
+@media (max-width: 600px) {
+  .contact-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* ─── Responsive: Navbar ─── */
+@media (max-width: 640px) {
+  .nav-links {
+    display: none !important;
+  }
+}
+
+/* ─── Pill hover ─── */
+.pill {
+  transition: all 0.2s ease;
+}
+
+.pill:hover {
+  border-color: var(--border-hover);
+  color: var(--text-primary);
+  background: var(--bg-card-hover);
+}
