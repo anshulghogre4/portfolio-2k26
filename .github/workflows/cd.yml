@@ -1,0 +1,47 @@
+name: CD — Deploy Portfolio
+
+on:
+  push:
+    branches: [main]
+
+concurrency:
+  group: cd-portfolio
+  cancel-in-progress: true
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build for production (SPA)
+        run: npm run build
+
+      - name: Clear old files on server
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: deploy
+          key: ${{ secrets.VPS_SSH_KEY }}
+          script: rm -rf /opt/portfolio/*
+
+      - name: Upload new build to server
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: deploy
+          key: ${{ secrets.VPS_SSH_KEY }}
+          source: "build/client/*"
+          target: /opt/portfolio/
+          strip_components: 2
