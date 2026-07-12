@@ -8,7 +8,7 @@ export interface Certification {
   color?: string;
 }
 
-export const certifications: Certification[] = [
+export const education: Certification[] = [
   {
     id: 'fde-academy',
     code: 'FDE Academy',
@@ -25,6 +25,25 @@ export const certifications: Certification[] = [
     verifyUrl: 'https://fde.academy',
     description: 'Academic certification from IIT Roorkee covering applied machine learning, AI infrastructure, and production deployment methodologies.',
   },
+  {
+    id: 'cdac',
+    code: 'CDAC Bengaluru',
+    title: 'PGDCA — Advanced Computing',
+    fullName: 'Post Graduate Diploma in Advanced Computing',
+    verifyUrl: '#',
+    description: 'Grade: A. 2022–2023. Intensive program focusing on advanced software engineering, data structures, and enterprise application development.',
+  },
+  {
+    id: 'galgotias',
+    code: 'Galgotias University',
+    title: 'B.Tech Civil Engineering',
+    fullName: 'Bachelor of Technology in Civil Engineering',
+    verifyUrl: '#',
+    description: 'Graduated with 89.60%. 2014–2018. Foundation in engineering mathematics, structural design, and analytical problem-solving.',
+  }
+];
+
+export const certifications: Certification[] = [
   {
     id: 'ai-102',
     code: 'AI-102',

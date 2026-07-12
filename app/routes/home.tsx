@@ -1,7 +1,7 @@
 import type { Route } from "./+types/home";
 import { profile } from "../data/profile";
 import { skillCategories } from "../data/skills";
-import { certifications } from "../data/certifications";
+import { certifications, education } from "../data/certifications";
 import { experiences } from "../data/experience";
 import { featuredProjects } from "../data/projects";
 
@@ -305,9 +305,60 @@ function SkillsSection() {
           ))}
         </div>
 
-        {/* Certifications */}
+        {/* Education */}
         <hr className="divider" />
-        <h3 style={{ fontSize: '20px', marginBottom: '24px' }}>Azure Certifications</h3>
+        <h3 style={{ 
+          fontSize: '20px', 
+          marginBottom: '24px',
+          color: 'var(--text-primary)'
+        }}>
+          Education
+        </h3>
+        <div
+          className="certs-grid"
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(4, 1fr)',
+            gap: '16px',
+            marginBottom: '48px',
+          }}
+        >
+          {education.map((cert) => (
+            <a
+              key={cert.id}
+              href={cert.verifyUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="card"
+              style={{ textDecoration: 'none', cursor: 'pointer' }}
+            >
+              <p style={{
+                fontFamily: 'var(--font-mono)',
+                fontSize: '13px',
+                fontWeight: 600,
+                color: 'var(--accent-blue)',
+                marginBottom: '8px',
+              }}>
+                {cert.code}
+              </p>
+              <h4 style={{ fontSize: '15px', marginBottom: '8px', color: 'var(--text-primary)' }}>
+                {cert.title}
+              </h4>
+              <p style={{ fontSize: '12px', color: 'var(--text-tertiary)', lineHeight: 1.5 }}>
+                {cert.description}
+              </p>
+            </a>
+          ))}
+        </div>
+
+        {/* Azure Certifications */}
+        <h3 style={{ 
+          fontSize: '20px', 
+          marginBottom: '24px',
+          color: 'var(--text-primary)'
+        }}>
+          Azure Certifications
+        </h3>
         <div
           className="certs-grid"
           style={{
