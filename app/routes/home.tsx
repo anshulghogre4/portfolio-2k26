@@ -296,7 +296,21 @@ function SkillsSection() {
               </p>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
                 {cat.skills.map((skill) => (
-                  <span key={skill.name} className="pill">
+                  <span key={skill.name} className="pill" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+                    {skill.icon && (
+                      <img
+                        src={skill.icon}
+                        alt={skill.name}
+                        style={{
+                          width: '14px',
+                          height: '14px',
+                          objectFit: 'contain',
+                          flexShrink: 0,
+                          filter: skill.icon.includes('000000') ? 'invert(1)' : 'none',
+                        }}
+                        onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
+                      />
+                    )}
                     {skill.name}
                   </span>
                 ))}
@@ -330,8 +344,32 @@ function SkillsSection() {
               target="_blank"
               rel="noreferrer"
               className="card"
-              style={{ textDecoration: 'none', cursor: 'pointer' }}
+              style={{ textDecoration: 'none', cursor: 'pointer', display: 'flex', flexDirection: 'column' }}
             >
+              {/* Logo at top of card */}
+              {cert.logo && (
+                <div style={{
+                  width: '52px',
+                  height: '52px',
+                  borderRadius: '10px',
+                  background: cert.logoBg ?? '#ffffff',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  overflow: 'hidden',
+                  padding: '6px',
+                  marginBottom: '12px',
+                  boxShadow: '0 2px 8px rgba(0,0,0,0.3)',
+                  flexShrink: 0,
+                }}>
+                  <img
+                    src={cert.logo}
+                    alt={cert.code}
+                    style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+                    onError={(e) => { (e.currentTarget.parentElement as HTMLElement).style.display = 'none'; }}
+                  />
+                </div>
+              )}
               <p style={{
                 fontFamily: 'var(--font-mono)',
                 fontSize: '13px',
@@ -341,10 +379,10 @@ function SkillsSection() {
               }}>
                 {cert.code}
               </p>
-              <h4 style={{ fontSize: '15px', marginBottom: '8px', color: 'var(--text-primary)' }}>
+              <h4 style={{ fontSize: '15px', marginBottom: '8px', color: 'var(--text-primary)', lineHeight: 1.4 }}>
                 {cert.title}
               </h4>
-              <p style={{ fontSize: '12px', color: 'var(--text-tertiary)', lineHeight: 1.5 }}>
+              <p style={{ fontSize: '12px', color: 'var(--text-tertiary)', lineHeight: 1.5, flex: 1 }}>
                 {cert.description}
               </p>
             </a>
@@ -374,20 +412,59 @@ function SkillsSection() {
               target="_blank"
               rel="noreferrer"
               className="card"
-              style={{ textDecoration: 'none', cursor: 'pointer' }}
+              style={{ textDecoration: 'none', cursor: 'pointer', display: 'flex', flexDirection: 'column' }}
             >
-              <p style={{
-                fontFamily: 'var(--font-mono)',
-                fontSize: '13px',
-                fontWeight: 600,
-                color: 'var(--accent-blue)',
-                marginBottom: '8px',
-              }}>
-                {cert.code}
-              </p>
+              {/* Top: badge image centered + cert code + badge chip */}
+              <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: '14px', gap: '8px' }}>
+                {/* Left: badge + code stacked */}
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                  {/* Official Microsoft Certified badge */}
+                  <img
+                    src={
+                      cert.badge === 'Expert'
+                        ? 'https://learn.microsoft.com/media/learn/certification/badges/microsoft-certified-expert-badge.svg'
+                        : 'https://learn.microsoft.com/media/learn/certification/badges/microsoft-certified-associate-badge.svg'
+                    }
+                    alt={`Microsoft Certified ${cert.badge}`}
+                    style={{ width: '52px', height: '52px', objectFit: 'contain', flexShrink: 0, display: 'block' }}
+                    onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
+                  />
+                  <p style={{
+                    fontFamily: 'var(--font-mono)',
+                    fontSize: '14px',
+                    fontWeight: 700,
+                    color: '#0078D4',
+                    margin: 0,
+                    whiteSpace: 'nowrap',
+                  }}>
+                    {cert.code}
+                  </p>
+                </div>
+                {/* Right: badge chip */}
+                {cert.badge && (
+                  <span style={{
+                    fontSize: '10px',
+                    fontWeight: 700,
+                    fontFamily: 'var(--font-mono)',
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.05em',
+                    padding: '4px 9px',
+                    borderRadius: '4px',
+                    flexShrink: 0,
+                    background: cert.badge === 'Expert'
+                      ? 'linear-gradient(135deg, rgba(139,92,246,0.25) 0%, rgba(217,70,239,0.2) 100%)'
+                      : 'linear-gradient(135deg, rgba(0,120,212,0.25) 0%, rgba(45,172,249,0.2) 100%)',
+                    color: cert.badge === 'Expert' ? '#c084fc' : '#38bdf8',
+                    border: `1px solid ${cert.badge === 'Expert' ? 'rgba(192,132,252,0.3)' : 'rgba(56,189,248,0.3)'}`,
+                    alignSelf: 'center',
+                  }}>
+                    {cert.badge === 'Expert' ? '★ Expert' : '◆ Associate'}
+                  </span>
+                )}
+              </div>
               <p style={{
                 fontSize: '14px',
-                fontWeight: 500,
+                fontWeight: 600,
                 color: 'var(--text-primary)',
                 marginBottom: '8px',
               }}>
@@ -397,9 +474,13 @@ function SkillsSection() {
                 fontSize: '12px',
                 color: 'var(--text-tertiary)',
                 lineHeight: 1.5,
+                flex: 1,
               }}>
                 {cert.description}
               </p>
+              <div style={{ marginTop: '12px', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                <span style={{ fontSize: '11px', color: '#0078D4', fontWeight: 500 }}>Verify on Microsoft Learn →</span>
+              </div>
             </a>
           ))}
         </div>

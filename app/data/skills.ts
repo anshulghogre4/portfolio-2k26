@@ -1,6 +1,7 @@
 export interface Skill {
   name: string;
   category: 'ai-agents' | 'rag-knowledge' | 'mlops' | 'cloud' | 'fullstack' | 'tools';
+  icon?: string; // SVG/PNG URL from devicons or simpleicons
 }
 
 export interface SkillCategory {
@@ -11,6 +12,7 @@ export interface SkillCategory {
   skills: Skill[];
 }
 
+// Using https://cdn.simpleicons.org/<slug> and https://cdn.jsdelivr.net/gh/devicons/devicon/icons/<name>/<name>-original.svg
 export const skillCategories: SkillCategory[] = [
   {
     id: 'ai-agents',
@@ -18,14 +20,14 @@ export const skillCategories: SkillCategory[] = [
     description: 'Multi-agent orchestration, LLM inference, fallback chains',
     accent: '#2dacf9',
     skills: [
-      { name: 'LangChain', category: 'ai-agents' },
-      { name: 'Semantic Kernel', category: 'ai-agents' },
-      { name: 'Azure OpenAI', category: 'ai-agents' },
-      { name: 'Azure AI Foundry', category: 'ai-agents' },
+      { name: 'LangChain', category: 'ai-agents', icon: 'https://cdn.simpleicons.org/langchain/1C3C3C' },
+      { name: 'Semantic Kernel', category: 'ai-agents', icon: 'https://cdn.simpleicons.org/microsoftazure/0078D4' },
+      { name: 'Azure OpenAI', category: 'ai-agents', icon: 'https://cdn.simpleicons.org/openai/412991' },
+      { name: 'Azure AI Foundry', category: 'ai-agents', icon: 'https://cdn.simpleicons.org/microsoftazure/0078D4' },
       { name: 'Multi-Agent Orchestration', category: 'ai-agents' },
       { name: 'LLM Fallback Chains', category: 'ai-agents' },
       { name: 'Prompt Engineering', category: 'ai-agents' },
-      { name: 'n8n', category: 'ai-agents' },
+      { name: 'n8n', category: 'ai-agents', icon: 'https://cdn.simpleicons.org/n8n/EA4B71' },
     ],
   },
   {
@@ -35,7 +37,7 @@ export const skillCategories: SkillCategory[] = [
     accent: '#7ce95a',
     skills: [
       { name: 'RAG Pipelines', category: 'rag-knowledge' },
-      { name: 'Vector Search (Qdrant)', category: 'rag-knowledge' },
+      { name: 'Vector Search (Qdrant)', category: 'rag-knowledge', icon: 'https://cdn.simpleicons.org/qdrant/DC244C' },
       { name: 'Knowledge Graphs', category: 'rag-knowledge' },
       { name: 'Embedding Models', category: 'rag-knowledge' },
       { name: 'Document Indexing', category: 'rag-knowledge' },
@@ -49,8 +51,8 @@ export const skillCategories: SkillCategory[] = [
     description: 'ML pipelines, model evaluation, data validation',
     accent: '#fa73da',
     skills: [
-      { name: 'scikit-learn', category: 'mlops' },
-      { name: 'Python', category: 'mlops' },
+      { name: 'scikit-learn', category: 'mlops', icon: 'https://cdn.simpleicons.org/scikitlearn/F7931E' },
+      { name: 'Python', category: 'mlops', icon: 'https://cdn.simpleicons.org/python/3776AB' },
       { name: 'ML Pipelines', category: 'mlops' },
       { name: 'Feature Engineering', category: 'mlops' },
       { name: 'Model Evaluation', category: 'mlops' },
@@ -64,13 +66,13 @@ export const skillCategories: SkillCategory[] = [
     description: 'Azure stack, self-hosted infra, Docker',
     accent: '#ffdf5f',
     skills: [
-      { name: 'Azure (AI-102, DP-100, AZ-305, AZ-104)', category: 'cloud' },
-      { name: 'Docker', category: 'cloud' },
-      { name: 'Supabase', category: 'cloud' },
+      { name: 'Azure', category: 'cloud', icon: 'https://cdn.simpleicons.org/microsoftazure/0078D4' },
+      { name: 'Docker', category: 'cloud', icon: 'https://cdn.simpleicons.org/docker/2496ED' },
+      { name: 'Supabase', category: 'cloud', icon: 'https://cdn.simpleicons.org/supabase/3ECF8E' },
       { name: 'Coolify', category: 'cloud' },
-      { name: 'Vercel', category: 'cloud' },
-      { name: 'PostgreSQL', category: 'cloud' },
-      { name: 'Self-hosted Qdrant', category: 'cloud' },
+      { name: 'Vercel', category: 'cloud', icon: 'https://cdn.simpleicons.org/vercel/000000' },
+      { name: 'PostgreSQL', category: 'cloud', icon: 'https://cdn.simpleicons.org/postgresql/4169E1' },
+      { name: 'Self-hosted Qdrant', category: 'cloud', icon: 'https://cdn.simpleicons.org/qdrant/DC244C' },
     ],
   },
   {
@@ -79,14 +81,14 @@ export const skillCategories: SkillCategory[] = [
     description: 'Frontends, backends, APIs for AI-powered products',
     accent: '#00d9ff',
     skills: [
-      { name: 'TypeScript', category: 'fullstack' },
-      { name: 'React / Next.js', category: 'fullstack' },
-      { name: 'Angular', category: 'fullstack' },
-      { name: 'React Router v7', category: 'fullstack' },
-      { name: '.NET / C#', category: 'fullstack' },
-      { name: 'FastAPI', category: 'fullstack' },
-      { name: 'Node.js', category: 'fullstack' },
-      { name: 'Spring Boot / Java', category: 'fullstack' },
+      { name: 'TypeScript', category: 'fullstack', icon: 'https://cdn.simpleicons.org/typescript/3178C6' },
+      { name: 'React / Next.js', category: 'fullstack', icon: 'https://cdn.simpleicons.org/react/61DAFB' },
+      { name: 'Angular', category: 'fullstack', icon: 'https://cdn.simpleicons.org/angular/DD0031' },
+      { name: 'React Router v7', category: 'fullstack', icon: 'https://cdn.simpleicons.org/reactrouter/CA4245' },
+      { name: '.NET / C#', category: 'fullstack', icon: 'https://cdn.simpleicons.org/dotnet/512BD4' },
+      { name: 'FastAPI', category: 'fullstack', icon: 'https://cdn.simpleicons.org/fastapi/009688' },
+      { name: 'Node.js', category: 'fullstack', icon: 'https://cdn.simpleicons.org/nodedotjs/339933' },
+      { name: 'Spring Boot / Java', category: 'fullstack', icon: 'https://cdn.simpleicons.org/springboot/6DB33F' },
     ],
   },
 ];
