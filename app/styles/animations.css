@@ -1,4 +1,35 @@
 /* ─── Smooth Entrance Animations ─── */
+
+/* Hero scroll indicator line pulse */
+@keyframes pulseDown {
+  0%, 100% { opacity: 0.3; transform: scaleY(1); }
+  50%       { opacity: 1;   transform: scaleY(1.15); }
+}
+
+/* Robotic eye status green dot */
+@keyframes pulseGreen {
+  0%, 100% { box-shadow: 0 0 4px rgba(34,197,94,0.5); }
+  50%       { box-shadow: 0 0 10px rgba(34,197,94,1), 0 0 20px rgba(34,197,94,0.4); }
+}
+
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 30s linear infinite;
+}
+
+/* ─── SplitText Helper ─── */
+.split-char, .blur-char {
+  display: inline-block;
+  will-change: transform, filter, opacity;
+}
+
 @keyframes fade-up {
   from {
     opacity: 0;

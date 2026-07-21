@@ -185,3 +185,89 @@ code, pre {
     --container-padding: 16px;
   }
 }
+
+/* ─── JS Enabled Animation States ─── */
+@media (scripting: enabled) {
+  .js-hide {
+    visibility: hidden;
+    opacity: 0;
+  }
+}
+
+/* ─── Mobile Hero Fallback (no WebGL on touch) ─── */
+@media (pointer: coarse) {
+  .hero-mobile-orbs {
+    display: block;
+  }
+}
+@media (pointer: fine) {
+  .hero-mobile-orbs {
+    display: none;
+  }
+}
+
+.hero-mobile-orbs {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.hero-mobile-orbs::before {
+  content: '';
+  position: absolute;
+  top: -10%;
+  right: -10%;
+  width: 60%;
+  height: 60%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(59,130,246,0.18) 0%, transparent 70%);
+  filter: blur(60px);
+  animation: floatOrb1 8s ease-in-out infinite;
+}
+
+.hero-mobile-orbs::after {
+  content: '';
+  position: absolute;
+  bottom: -10%;
+  left: -5%;
+  width: 55%;
+  height: 55%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(168,85,247,0.15) 0%, transparent 70%);
+  filter: blur(70px);
+  animation: floatOrb2 10s ease-in-out infinite;
+}
+
+@keyframes floatOrb1 {
+  0%, 100% { transform: translate(0, 0); }
+  50%       { transform: translate(-5%, 8%); }
+}
+
+@keyframes floatOrb2 {
+  0%, 100% { transform: translate(0, 0); }
+  50%       { transform: translate(6%, -6%); }
+}
+
+/* ─── Hero Button Hover States ─── */
+.btn-primary:hover {
+  background: #2563eb !important;
+  box-shadow: 0 0 40px rgba(59,130,246,0.5) !important;
+}
+
+.btn-secondary:hover {
+  border-color: rgba(255,255,255,0.3) !important;
+  background: rgba(255,255,255,0.06) !important;
+}
+
+/* ─── Role text style ─── */
+.role-text {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent-blue);
+  opacity: 0.9;
+}
+

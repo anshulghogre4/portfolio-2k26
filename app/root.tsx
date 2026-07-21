@@ -12,6 +12,7 @@ import "./styles/global.css";
 import "./styles/animations.css";
 import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
+import { ScrollProgressBar } from "./components/ScrollProgressBar";
 
 export const links: Route.LinksFunction = () => [
   { rel: "icon", type: "image/png", href: "/favicon.png" },
@@ -23,6 +24,8 @@ export const links: Route.LinksFunction = () => [
   },
 ];
 
+import { SmoothScrollProvider } from "./components/SmoothScrollProvider";
+
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
@@ -33,9 +36,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-        <Navbar />
-        {children}
-        <Footer />
+        <SmoothScrollProvider>
+          <ScrollProgressBar />
+          <Navbar />
+          {children}
+          <Footer />
+        </SmoothScrollProvider>
         <ScrollRestoration />
         <Scripts />
       </body>
