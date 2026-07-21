@@ -78,6 +78,16 @@ export function HeroSection() {
       {/* Mobile fallback — CSS orbs shown only on touch devices (pointer: coarse) */}
       <div className="hero-mobile-orbs" aria-hidden="true" />
 
+      {/* Bottom-fade: dissolves neural network into page background */}
+      <div aria-hidden="true" style={{
+        position: 'absolute',
+        bottom: 0, left: 0, right: 0,
+        height: '220px',
+        background: 'linear-gradient(to bottom, transparent 0%, #0a0a0a 100%)',
+        pointerEvents: 'none',
+        zIndex: 1,
+      }} />
+
       {/* Sound toggle */}
       <SoundToggle />
 

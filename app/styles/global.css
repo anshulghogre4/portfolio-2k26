@@ -109,9 +109,8 @@ code, pre {
   padding: var(--section-gap) 0;
 }
 
-.section + .section {
-  border-top: 1px solid var(--border-subtle);
-}
+/* Section dividers removed — gradient fades at each section boundary
+   handle visual separation more elegantly than hairline borders */
 
 /* ─── Section Label (monospace uppercase) ─── */
 .section-label {

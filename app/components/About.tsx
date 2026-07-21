@@ -78,12 +78,26 @@ export function AboutSection() {
   };
 
   return (
-    <section ref={sectionRef} id="about" className="section js-hide" style={{ position: 'relative', overflow: 'hidden' }}>
-
+    <section
+      ref={sectionRef}
+      id="about"
+      className="section js-hide"
+      style={{ position: 'relative', overflow: 'hidden', borderTop: 'none' }}
+    >
       {/* ── Orb background (re-instating the original animated orbs) ── */}
       <div aria-hidden="true" style={{
         position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none', overflow: 'hidden',
       }}>
+        {/* Top-fade — particle sphere emerges smoothly from page background */}
+        <div aria-hidden="true" style={{
+          position: 'absolute',
+          top: 0, left: 0, right: 0,
+          height: '220px',
+          background: 'linear-gradient(to top, transparent 0%, #0a0a0a 100%)',
+          pointerEvents: 'none',
+          zIndex: 2,
+        }} />
+
         {/* Blue orb — top-left */}
         <div style={{
           position: 'absolute',
@@ -117,6 +131,16 @@ export function AboutSection() {
           backgroundSize: '40px 40px',
           maskImage: 'radial-gradient(ellipse 70% 60% at 50% 50%, black, transparent)',
           WebkitMaskImage: 'radial-gradient(ellipse 70% 60% at 50% 50%, black, transparent)',
+        }} />
+
+        {/* Bottom-fade: sphere dissolves into page background before next section */}
+        <div aria-hidden="true" style={{
+          position: 'absolute',
+          bottom: 0, left: 0, right: 0,
+          height: '220px',
+          background: 'linear-gradient(to bottom, transparent 0%, #0a0a0a 100%)',
+          pointerEvents: 'none',
+          zIndex: 3,
         }} />
       </div>
 
