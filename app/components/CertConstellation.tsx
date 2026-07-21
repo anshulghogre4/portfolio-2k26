@@ -103,7 +103,76 @@ export function CertConstellation() {
         0 20px 60px rgba(0,0,0,0.65),
         0 0 40px rgba(${AZURE},0.22) !important;
     }
+
+    /* ── Mobile: hide orbit, show stacked grid ────────────────────────── */
+    @media (max-width: 767px) {
+      .cert-orbit-wrap  { display: none !important; }
+      .cert-mobile-grid { display: flex !important; }
+    }
+    @media (min-width: 768px) {
+      .cert-mobile-grid { display: none !important; }
+    }
+
+    /* Mobile card grid */
+    .cert-mobile-grid {
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      padding: 0 16px;
+      width: 100%;
+    }
+
+    /* Mobile hub */
+    .cert-mobile-hub {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 90px; height: 90px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 40% 35%,
+        rgba(255,255,255,0.9) 0%,
+        rgba(${AZURE_LITE},0.8) 15%,
+        rgba(${AZURE},0.6) 38%,
+        rgba(${AZURE},0.25) 60%,
+        transparent 75%),
+        radial-gradient(circle, rgba(${AZURE},0.4) 0%, rgba(${AZURE},0.12) 55%, transparent 75%);
+      box-shadow:
+        0 0 40px 12px rgba(${AZURE},0.4),
+        0 0 80px 24px rgba(${AZURE},0.18);
+      margin: 0 auto 28px;
+      animation: hubPulse 4.5s ease-in-out infinite;
+    }
+
+    /* Mobile cert cards: 2-col on wider phones, 1-col on small phones */
+    .cert-mobile-cards-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      width: 100%;
+      max-width: 520px;
+    }
+    @media (max-width: 479px) {
+      .cert-mobile-cards-grid { grid-template-columns: 1fr; max-width: 360px; }
+    }
+
+    /* Mobile individual cert card */
+    .cert-mobile-card {
+      background: linear-gradient(145deg, rgba(8,16,32,0.95) 0%, rgba(16,30,56,0.88) 100%);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(80,175,255,0.15);
+      border-radius: 14px;
+      padding: 14px 14px 12px;
+      cursor: pointer;
+      transition: border-color 0.3s, box-shadow 0.3s, transform 0.2s;
+    }
+    .cert-mobile-card:hover {
+      border-color: rgba(${AZURE_LITE},0.45);
+      box-shadow: 0 0 24px rgba(${AZURE},0.2);
+      transform: translateY(-3px);
+    }
   `;
+
 
   // ── GSAP effects ─────────────────────────────────────────────────────────────
   useEffect(() => {
@@ -217,7 +286,7 @@ export function CertConstellation() {
       </div>
 
       {/* ── Orbital system container ─────────────────────────────────────── */}
-      <div style={{
+      <div className="cert-orbit-wrap" style={{
         position: 'relative',
         width: '940px',
         height: '860px',
@@ -459,6 +528,79 @@ export function CertConstellation() {
             </div>
           );
         })}
+      </div>
+      {/* ── Mobile card grid (hidden on desktop) ─────────────────────── */}
+      <div className="cert-mobile-grid">
+        {/* Compact Azure hub */}
+        <div className="cert-mobile-hub">
+          <img
+            src="/images/azure.png"
+            alt="Microsoft Azure"
+            style={{ width: '42px', height: '42px', objectFit: 'contain', filter: 'drop-shadow(0 0 8px rgba(80,175,255,0.9)) drop-shadow(0 0 20px rgba(56,145,255,0.6))' }}
+          />
+        </div>
+
+        {/* 2-col (mobile) or 1-col (small phone) card grid */}
+        <div className="cert-mobile-cards-grid">
+          {certifications.map((cert) => {
+            const badge = cert.badge ? (BADGE[cert.badge] ?? BADGE.Associate) : null;
+            return (
+              <div
+                key={cert.id}
+                className="cert-mobile-card"
+                onClick={() => window.open(cert.verifyUrl, '_blank')}
+              >
+                {/* Top: badge icon + code + tier pill */}
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '7px' }}>
+                    <img
+                      src={cert.badge === 'Expert'
+                        ? 'https://learn.microsoft.com/media/learn/certification/badges/microsoft-certified-expert-badge.svg'
+                        : 'https://learn.microsoft.com/media/learn/certification/badges/microsoft-certified-associate-badge.svg'
+                      }
+                      alt={cert.code}
+                      style={{ width: '28px', height: '28px', objectFit: 'contain' }}
+                      onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
+                    />
+                    <span style={{
+                      fontFamily: 'var(--font-mono)', fontSize: '10px', fontWeight: 700,
+                      color: 'rgba(148,163,184,0.85)', letterSpacing: '0.04em',
+                    }}>{cert.code}</span>
+                  </div>
+                  {badge && (
+                    <span style={{
+                      display: 'inline-flex', alignItems: 'center',
+                      padding: '2px 7px', borderRadius: '4px', fontSize: '9px', fontWeight: 700,
+                      letterSpacing: '0.06em', fontFamily: 'var(--font-mono)',
+                      color: badge.color, background: badge.bg, border: `1px solid ${badge.border}`,
+                      whiteSpace: 'nowrap',
+                    }}>
+                      {badge.label}
+                    </span>
+                  )}
+                </div>
+
+                {/* Title */}
+                <h4 style={{ fontSize: '12px', fontWeight: 700, color: '#fff', lineHeight: 1.3, margin: '0 0 5px' }}>
+                  {cert.title}
+                </h4>
+
+                {/* Description */}
+                <p style={{
+                  fontSize: '10px', color: 'rgba(148,163,184,0.72)', lineHeight: 1.5, margin: '0 0 8px',
+                  display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden',
+                } as React.CSSProperties}>
+                  {cert.description}
+                </p>
+
+                {/* Verify link */}
+                <span style={{ fontSize: '9px', fontFamily: 'var(--font-mono)', color: `rgba(${AZURE_LITE},0.8)`, fontWeight: 500 }}>
+                  Verify on Microsoft Learn →
+                </span>
+              </div>
+            );
+          })}
+        </div>
       </div>
 
       {/* ── Section boundary fades ────────────────────────────────────────── */}

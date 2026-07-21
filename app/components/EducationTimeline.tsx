@@ -43,6 +43,38 @@ export function EducationTimeline() {
   const cardRefs    = useRef<(HTMLDivElement | null)[]>([]);
   const nodeRefs    = useRef<(HTMLDivElement | null)[]>([]);
 
+  // ── Mobile-responsive CSS ─────────────────────────────────────────────
+  const MOBILE_CSS = `
+    @media (max-width: 767px) {
+      /* Spine moves to left edge */
+      .edu-spine { left: 28px !important; transform: none !important; }
+
+      /* All items: always row, left-to-right */
+      .edu-item { flex-direction: row !important; align-items: flex-start !important; }
+
+      /* Node column: fixed 56px, forced first via order */
+      .edu-node-col { width: 56px !important; order: -1; }
+
+      /* Card: takes remaining space, second */
+      .edu-card {
+        width: calc(100% - 56px) !important;
+        order: 1;
+        padding: 20px 16px 16px !important;
+      }
+
+      /* Spacer: hidden */
+      .edu-spacer { display: none !important; }
+
+      /* Connector lines: hidden on mobile (looks clean without them) */
+      .edu-connector { display: none !important; }
+    }
+
+    @media (max-width: 480px) {
+      .edu-card h4 { font-size: 15px !important; }
+      .edu-card p  { font-size: 12px !important; }
+    }
+  `;
+
   useEffect(() => {
     if (!sectionRef.current || !spineFillRef.current) return;
     const section = sectionRef.current;
@@ -143,6 +175,7 @@ export function EducationTimeline() {
         borderTop: 'none',
       }}
     >
+      <style dangerouslySetInnerHTML={{ __html: MOBILE_CSS }} />
       {/* ── Section header ────────────────────────────────────────────────────── */}
       <div className="container" style={{ marginBottom: '72px', textAlign: 'center' }}>
         <p className="section-label">// Education</p>
@@ -153,10 +186,11 @@ export function EducationTimeline() {
       </div>
 
       {/* ── Timeline container ────────────────────────────────────────────────── */}
-      <div style={{ position: 'relative', maxWidth: '860px', margin: '0 auto', padding: '0 24px' }}>
+      <div className="edu-timeline-container" style={{ position: 'relative', maxWidth: '860px', margin: '0 auto', padding: '0 24px' }}>
 
         {/* Spine track (full height background) */}
         <div
+          className="edu-spine"
           aria-hidden="true"
           style={{
             position: 'absolute',
@@ -190,6 +224,7 @@ export function EducationTimeline() {
             return (
               <div
                 key={item.id}
+                className="edu-item"
                 style={{
                   display: 'flex',
                   alignItems: 'center',
@@ -199,6 +234,7 @@ export function EducationTimeline() {
                 {/* Card */}
                 <div
                   ref={(el) => { cardRefs.current[i] = el; }}
+                  className="edu-card"
                   onClick={() => window.open(item.verifyUrl, '_blank')}
                   style={{
                     width: 'calc(50% - 36px)',
@@ -277,13 +313,13 @@ export function EducationTimeline() {
                 </div>
 
                 {/* Center: connector + node ────────────────────────────────── */}
-                <div style={{
+                <div className="edu-node-col" style={{
                   width: '72px', flexShrink: 0,
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
                   position: 'relative', zIndex: 2,
                 }}>
                   {/* Connector line */}
-                  <div style={{
+                  <div className="edu-connector" style={{
                     position: 'absolute',
                     top: '50%',
                     ...(isLeft ? { left: '50%' } : { right: '50%' }),
@@ -307,7 +343,7 @@ export function EducationTimeline() {
                 </div>
 
                 {/* Spacer (opposite side) */}
-                <div style={{ width: 'calc(50% - 36px)', flexShrink: 0 }} />
+                <div className="edu-spacer" style={{ width: 'calc(50% - 36px)', flexShrink: 0 }} />
               </div>
             );
           })}

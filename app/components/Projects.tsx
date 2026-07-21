@@ -92,6 +92,68 @@ export function ProjectsSection() {
 
   }, { scope: sectionRef });
 
+  const MOBILE_CSS = `
+    @media (max-width: 767px) {
+      .proj-title {
+        top: 10% !important;
+        left: 5vw !important;
+      }
+      .proj-track {
+        margin-top: 35vh !important;
+        gap: 60px !important;
+        padding-left: 20vw !important;
+      }
+      .proj-card {
+        width: 360px !important;
+        height: 480px !important;
+      }
+      .proj-card-inner {
+        padding: 24px !important;
+      }
+      .proj-card-title {
+        font-size: 20px !important;
+        margin-bottom: 12px !important;
+      }
+      .proj-card-text-container {
+        gap: 12px !important;
+        margin-bottom: 16px !important;
+      }
+      .proj-card-text {
+        font-size: 13px !important;
+        line-height: 1.4 !important;
+      }
+      .proj-card-result {
+        padding: 10px !important;
+      }
+      .proj-card-tag {
+        font-size: 10px !important;
+        padding: 6px 10px !important;
+      }
+    }
+    @media (max-width: 480px) {
+      .proj-card {
+        width: 320px !important;
+        height: 460px !important;
+      }
+      .proj-track {
+        margin-top: 40vh !important;
+      }
+      .proj-card-inner {
+        padding: 20px !important;
+      }
+      .proj-card-title {
+        font-size: 18px !important;
+      }
+      .proj-card-text {
+        font-size: 12px !important;
+      }
+      .proj-card-tag {
+        font-size: 9px !important;
+        padding: 4px 8px !important;
+      }
+    }
+  `;
+
   return (
     <section 
       ref={sectionRef} 
@@ -104,6 +166,8 @@ export function ProjectsSection() {
         background: 'transparent',
       }}
     >
+      <style dangerouslySetInnerHTML={{ __html: MOBILE_CSS }} />
+
       {/* Background SVG Ribbon Path */}
       <div style={{
         position: 'absolute',
@@ -145,7 +209,7 @@ export function ProjectsSection() {
         }}
       >
         {/* Title Container (Fixed left position during horizontal scroll) */}
-        <div style={{ position: 'absolute', top: '15%', left: '10vw', zIndex: 20 }}>
+        <div className="proj-title" style={{ position: 'absolute', top: '15%', left: '10vw', zIndex: 20 }}>
           <p className="section-label">Projects</p>
           <h2 style={{ marginBottom: '16px' }}>Featured Builds</h2>
           <p style={{
@@ -161,7 +225,7 @@ export function ProjectsSection() {
         {/* The Scrolling Ribbon Track */}
         <div 
           ref={trackRef}
-          className="ribbon-track"
+          className="ribbon-track proj-track"
           style={{
             display: 'flex',
             alignItems: 'center',
@@ -176,7 +240,7 @@ export function ProjectsSection() {
           {featuredProjects.map((project, i) => (
             <div
               key={project.slug}
-              className="ribbon-card"
+              className="ribbon-card proj-card"
               style={{
                 width: '450px',
                 height: '600px',
@@ -188,7 +252,7 @@ export function ProjectsSection() {
                 href={project.githubUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="card project-3d-card"
+                className="card project-3d-card proj-card-inner"
                 style={{ 
                   textDecoration: 'none', 
                   cursor: 'pointer', 
@@ -218,14 +282,14 @@ export function ProjectsSection() {
                 <div style={{ position: 'absolute', top: 0, left: '10%', width: '80%', height: '2px', background: 'linear-gradient(90deg, transparent, rgba(192, 132, 252, 0.8), transparent)' }} />
                 
                 <div>
-                  <div style={{
+                  <div className="proj-card-title-container" style={{
                     display: 'flex',
                     justifyContent: 'space-between',
                     alignItems: 'flex-start',
                     marginBottom: '20px',
                     gap: '12px',
                   }}>
-                    <h3 style={{ fontSize: '24px', fontWeight: 700, color: '#fff', letterSpacing: '-0.02em' }}>{project.title}</h3>
+                    <h3 className="proj-card-title" style={{ fontSize: '24px', fontWeight: 700, color: '#fff', letterSpacing: '-0.02em' }}>{project.title}</h3>
                     <span style={{
                       fontFamily: 'var(--font-mono)',
                       fontSize: '11px',
@@ -243,21 +307,21 @@ export function ProjectsSection() {
                     </span>
                   </div>
 
-                  <div style={{
+                  <div className="proj-card-text-container" style={{
                     display: 'flex',
                     flexDirection: 'column',
                     gap: '18px',
                     marginBottom: '24px',
                   }}>
-                    <div style={{ fontSize: '15px', lineHeight: 1.6 }}>
+                    <div className="proj-card-text" style={{ fontSize: '15px', lineHeight: 1.6 }}>
                       <span style={{ fontWeight: 600, color: 'var(--text-primary)' }}>Problem: </span>
                       <span style={{ color: 'var(--text-secondary)' }}>{project.problem}</span>
                     </div>
-                    <div style={{ fontSize: '15px', lineHeight: 1.6 }}>
+                    <div className="proj-card-text" style={{ fontSize: '15px', lineHeight: 1.6 }}>
                       <span style={{ fontWeight: 600, color: 'var(--text-primary)' }}>Approach: </span>
                       <span style={{ color: 'var(--text-secondary)' }}>{project.approach}</span>
                     </div>
-                    <div style={{ fontSize: '15px', lineHeight: 1.6, padding: '14px', background: 'rgba(255,255,255,0.03)', borderRadius: '12px', borderLeft: '4px solid #38bdf8' }}>
+                    <div className="proj-card-text proj-card-result" style={{ fontSize: '15px', lineHeight: 1.6, padding: '14px', background: 'rgba(255,255,255,0.03)', borderRadius: '12px', borderLeft: '4px solid #38bdf8' }}>
                       <span style={{ fontWeight: 700, color: '#38bdf8' }}>Result: </span>
                       <span style={{ color: 'var(--text-secondary)' }}>{project.result}</span>
                     </div>
@@ -266,7 +330,7 @@ export function ProjectsSection() {
 
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', marginTop: 'auto' }}>
                   {project.techStack.slice(0, 5).map((tech) => (
-                    <span key={tech} className="pill" style={{ 
+                    <span key={tech} className="pill proj-card-tag" style={{ 
                       fontSize: '12px', 
                       padding: '8px 14px', 
                       background: 'rgba(255,255,255,0.05)',
@@ -279,7 +343,7 @@ export function ProjectsSection() {
                     </span>
                   ))}
                   {project.techStack.length > 5 && (
-                    <span className="pill" style={{ fontSize: '12px', padding: '8px 14px', background: 'rgba(255,255,255,0.02)', borderRadius: '16px', fontWeight: 500 }}>
+                    <span className="pill proj-card-tag" style={{ fontSize: '12px', padding: '8px 14px', background: 'rgba(255,255,255,0.02)', borderRadius: '16px', fontWeight: 500 }}>
                       +{project.techStack.length - 5}
                     </span>
                   )}
