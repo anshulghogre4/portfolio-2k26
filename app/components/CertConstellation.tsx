@@ -341,7 +341,7 @@ export function CertConstellation() {
           }} />
           {/* Real Azure logo — 58px, balanced inside the 160px hub */}
           <img
-            src="/images/azure-rmbg.png"
+            src="/images/azure.png"
             alt="Microsoft Azure"
             style={{
               width: '58px',
