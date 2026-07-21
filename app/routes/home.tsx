@@ -4,6 +4,8 @@ import { AboutSection } from "../components/About";
 import { SkillsSection } from "../components/Skills";
 import { WorkSection } from "../components/Work";
 import { ProjectsSection } from "../components/Projects";
+import { EducationTimeline } from "../components/EducationTimeline";
+import { CertConstellation } from "../components/CertConstellation";
 import { ContactSection } from "../components/Contact";
 
 export function meta({}: Route.MetaArgs) {
@@ -17,7 +19,7 @@ export function meta({}: Route.MetaArgs) {
 
 /* ─────────────────────────────────
    FULL SINGLE-PAGE PORTFOLIO
-   Hero → About → Skills → Work → Projects → Contact
+   Hero → About → Work → Projects → Skills → Education → Certs → Contact
    ───────────────────────────────── */
 export default function Home() {
   return (
@@ -27,6 +29,8 @@ export default function Home() {
       <WorkSection />
       <ProjectsSection />
       <SkillsSection />
+      <EducationTimeline />
+      <CertConstellation />
       <ContactSection />
     </div>
   );
