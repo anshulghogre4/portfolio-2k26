@@ -26,7 +26,7 @@ export const education: Certification[] = [
   {
     id: 'iit-roorkee',
     code: 'IIT Roorkee',
-    title: 'Certification in Forward Deployed AI Engineering',
+    title: 'PGC in Forward Deployed AI Engineering',
     fullName: 'IIT Roorkee Certification Add-On — Forward Deployed AI Engineering',
     verifyUrl: 'https://www.iitr.ac.in/',
     logo: '/images/IITR.png',
